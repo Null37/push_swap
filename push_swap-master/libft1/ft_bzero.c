@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ssamadi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/28 12:45:58 by ssamadi           #+#    #+#             */
+/*   Updated: 2019/11/15 13:53:35 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+void	ft_bzero(void *str, size_t n)
 {
-    int len_a;
-    int len_b;
-}   t_all;
+	size_t	nbr;
+	char	*p;
 
-#endif
+	p = str;
+	nbr = 0;
+	while (nbr < n)
+	{
+		p[nbr] = '\0';
+		nbr++;
+	}
+}

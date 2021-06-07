@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/10 22:00:14 by ssamadi           #+#    #+#             */
+/*   Updated: 2021/05/15 16:37:24 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+int	ft_isalpha(int ch)
 {
-    int len_a;
-    int len_b;
-}   t_all;
-
-#endif
+	if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+	{
+		return (1);
+	}
+	else
+		return (0);
+}

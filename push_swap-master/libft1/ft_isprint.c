@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ssamadi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/11 19:02:28 by ssamadi           #+#    #+#             */
+/*   Updated: 2019/11/14 20:03:53 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+int	ft_isprint(int nbr)
 {
-    int len_a;
-    int len_b;
-}   t_all;
-
-#endif
+	if (nbr >= 32 && nbr < 127)
+	{
+		return (1);
+	}
+	else
+		return (0);
+}

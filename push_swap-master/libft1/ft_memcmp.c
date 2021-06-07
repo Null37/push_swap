@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/16 22:15:00 by ssamadi           #+#    #+#             */
+/*   Updated: 2021/05/26 16:04:35 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    int len_a;
-    int len_b;
-}   t_all;
+	unsigned char	*p;
+	unsigned char	*p2;
+	size_t			i;
 
-#endif
+	i = 0;
+	p = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (p[i] != p2[i])
+			return (p[i] - p2[i]);
+		i++;
+	}
+	return (0);
+}

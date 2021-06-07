@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ssamadi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/10 10:39:34 by ssamadi           #+#    #+#             */
+/*   Updated: 2019/11/15 13:45:20 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+void	*ft_memset(void *str, int source, size_t line)
 {
-    int len_a;
-    int len_b;
-}   t_all;
+	size_t			nbr;
+	unsigned char	*p;
 
-#endif
+	p = (unsigned char *)str;
+	nbr = 0;
+	while (nbr < line)
+	{
+		p[nbr] = source;
+		nbr++;
+	}
+	return (str);
+}

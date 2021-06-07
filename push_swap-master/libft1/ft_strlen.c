@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/10 11:03:17 by ssamadi           #+#    #+#             */
+/*   Updated: 2021/05/18 11:58:32 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
-typedef struct s_all
+size_t	ft_strlen(char const *str)
 {
-    int len_a;
-    int len_b;
-}   t_all;
+	size_t	x;
 
-#endif
+	x = 0;
+	if (str == NULL)
+		return (0);
+	while (str[x] != '\0')
+		x++;
+	return (x);
+}

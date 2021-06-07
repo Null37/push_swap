@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/20 12:17:06 by ssamadi           #+#    #+#             */
+/*   Updated: 2021/05/26 16:04:46 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+void	ft_putnbr_fd(int nbr, int fd)
 {
-    int len_a;
-    int len_b;
-}   t_all;
+	unsigned int	num;
 
-#endif
+	num = nbr;
+	if (nbr < 0)
+	{
+		ft_putchar_fd('-', fd);
+		num = num * -1;
+	}
+	if (num < 10)
+	{
+		ft_putchar_fd(num + 48, fd);
+	}
+	if (num >= 10)
+	{
+		ft_putnbr_fd(num / 10, fd);
+		ft_putchar_fd(num % 10 + 48, fd);
+	}
+}

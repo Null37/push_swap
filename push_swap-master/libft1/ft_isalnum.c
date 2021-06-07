@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ssamadi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/11 13:49:07 by ssamadi           #+#    #+#             */
+/*   Updated: 2019/10/11 14:13:45 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+int	ft_isalnum(int nbr)
 {
-    int len_a;
-    int len_b;
-}   t_all;
-
-#endif
+	if ((nbr >= '0' && nbr <= '9') || (nbr >= 'a' && nbr <= 'z'))
+		return (1);
+	if (nbr >= 'A' && nbr <= 'Z')
+	{
+		return (1);
+	}
+	else
+		return (0);
+}

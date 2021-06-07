@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/14 17:20:17 by ssamadi           #+#    #+#             */
+/*   Updated: 2021/05/18 11:57:17 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+char	*ft_strnstr(const char *dst, const char *src, size_t len)
 {
-    int len_a;
-    int len_b;
-}   t_all;
+	size_t	i;
+	size_t	j;
 
-#endif
+	i = 0;
+	if (ft_strlen(src) == 0)
+		return ((char *)dst);
+	if (len == 0)
+		return (0);
+	while (dst[i] != '\0' && i < len)
+	{
+		j = 0;
+		while (dst[i + j] == src[j] && i + j < len)
+		{
+			j++;
+			if (src[j] == '\0')
+				return ((char *)&dst[i]);
+		}
+		i++;
+	}
+	return (0);
+}

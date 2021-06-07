@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/11/12 12:00:26 by ssamadi           #+#    #+#             */
+/*   Updated: 2021/05/26 16:02:16 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-    int len_a;
-    int len_b;
-}   t_all;
+	t_list	*p;
+	t_list	*store;
 
-#endif
+	if (lst != NULL && del != NULL)
+	{
+		store = *lst;
+		while (store != NULL)
+		{
+			p = store;
+			store = store->next;
+			del(p->content);
+			free(p);
+		}
+		*lst = NULL;
+	}
+}

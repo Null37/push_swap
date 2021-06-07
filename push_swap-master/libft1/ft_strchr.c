@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:13 by ssamadi          ###   ########.fr       */
+/*   Created: 2019/10/14 14:31:43 by ssamadi           #+#    #+#             */
+/*   Updated: 2021/05/26 16:09:00 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_all
+char	*ft_strchr(const char *str, int n)
 {
-    int len_a;
-    int len_b;
-}   t_all;
+	size_t	i;
 
-#endif
+	i = 0;
+	while (str[i] != '\0' && str[i] != n)
+	{
+		i++;
+	}
+	if (str[i] == n)
+	{
+		return ((char *)str + i);
+	}
+	else
+		return (NULL);
+}

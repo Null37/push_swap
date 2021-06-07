@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:34:52 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 18:05:46 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/07 19:00:26 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,8 +347,9 @@ void	half_twenty(int ta[], int tb[])
 	all = all_t();
 	int min = min_number(ta, all->len_a);
 	int index = get_index(ta, all->len_a, min);
-	printf("min == %d | index == %d\n", min, index);
+
 	int size = all->len_a / 2;
+	printf("min == %d | index == %d | size == %d\n", min, index, size);
 	if (index <= size)
 	{
 		while (index > 0)
@@ -367,8 +368,20 @@ void	half_twenty(int ta[], int tb[])
 			index++;
 		}
 	}
+	int i = 0;
+	while(i < all->len_a)
+	{
+		printf("%da == %d\n", ta[i], all->len_a);
+		i++;
+	}
 	write(1, "pb\n", 3);
 	push_b(ta, tb);
+	i = 0;
+	while(i < all->len_b)
+	{
+		printf("%db\n", tb[i]);
+		i++;
+	}
 }
 
 void	sort_twenty(int ta[], int tb[])
@@ -383,12 +396,12 @@ void	sort_twenty(int ta[], int tb[])
 		i++;
 	}
 	i = 0;
-	while (i < all->len_b)
-	{
-		write(1, "pa\n", 3);
-		push_a(ta, tb);
-		i++;
-	}
+	// while (i < all->len_b)
+	// {
+	// 	write(1, "pa\n", 3);
+	// 	push_a(ta, tb);
+	// 	i++;
+	// }
 	
 }
 

@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:34:52 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/08 19:16:09 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/08 20:24:26 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -452,9 +452,14 @@ void	half_addmin(int table_c[], int table_min[], int k)
 	int min = min_number(table_c, all->len_c);
 	int index = get_index(table_c, all->len_c, min);
 	//printf("index == %d | min == %d\n", index, min);
-	int  i = 0;
+	int  i = index;
 	table_min[k] = table_c[index];
-	table_c[index] = table_c[index + 1];
+	while (i < all->len_c - 1)
+	{
+		table_c[i] = table_c[i + 1];
+		i++;
+	}
+	
 	all->len_c--;
 }
 
@@ -485,19 +490,38 @@ int	check_ith_range(int table_min[], int ta)
 	}
 	return (-1);
 }
+void	print_table(int len, int t[len])
+{
+	int i;
 
+	i = -1;
+	fprintf(stderr, "\n");
+	while (++i<len)
+	{
+		fprintf(stderr, "%d ", t[i]);
+	}
+	
+}
 void	start_sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
 {
 	t_all *all;
 
 	all = all_t();
-	all->len_min = 4;
+	int d = all->len_min;
 	int i = 0;
 	int j = all->len_a;
-	while (i < all->len_a)
+	printf("lenn == %d\n", all->len_a);
+	while (1)
 	{
+		if (all->len_a <= 0 || d == 0)
+			break ;
+		print_table(all->len_a, table_a);
+		print_table(all->len_b, table_b);
+		print_table(all->len_c, table_c);
+		print_table(all->len_min, table_min);
 		if (check_ith_range(table_min, table_a[0]) == 2)
 		{
+			d--;
 			write(1, "pb\n", 3);
 			push_b(table_a, table_b);
 			continue ;
@@ -507,12 +531,14 @@ void	start_sort_hundred(int table_a[], int table_b[], int table_c[], int table_m
 			write(1, "ra\n", 3);
 			rotate(table_a, all->len_a);
 			i = 0;
+			j = all->len_a;
 		}
 		else if (i < j && check_ith_range(table_min, table_a[--j]) == 2)
 		{
 			write(1, "rra\n", 4);
 			reverce_rotate(table_a, all->len_a);
 			j = all->len_a;
+			i = 0;
 		}
 	}
 }
@@ -530,23 +556,38 @@ void	sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
 
 	all = all_t();
 	
-	int i = 0;
+	int i;
 	// while(i < 4)
 	// {
-	// 	printf("\nmin ==> %dm\n", table_min[i]);
+	// 	//printf("\nmin ==> %dm\n", table_min[i]);
 	// 	i++;
 	// }
 	
 	// while(i < 4)
 	// {
-		add_min(table_c, table_min, 4);
+		//add_min(table_c, table_min, 4);
+		// i = 0;
+		// while(i < 4)
+		// {
+		// 	printf("\nmin ==> %dm\n", table_min[i]);
+		// 	i++;
+		// }
 		i = 0;
-		while(i < 4)
+		//start_sort_hundred(table_a, table_b, table_c, table_min);
+		while (all->len_a > 0)
 		{
-			printf("\nmin ==> %dm\n", table_min[i]);
-			i++;
+			if (all->len_a > 4)
+			{
+				add_min(table_c, table_min, 4);
+				all->len_min = 4;
+			}
+			else
+			{
+				add_min(table_c, table_min, all->len_a);
+				all->len_min=all->len_a;
+			}
+			start_sort_hundred(table_a, table_b, table_c, table_min);
 		}
-		// start_sort_hundred(table_a, table_b, table_c, table_min);
 		// add_min(table_c, table_min, 4);
 		// i = 0;
 		// while(i < 2)
@@ -566,12 +607,12 @@ void	sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
 	// 	printf("%da\n", table_a[i]);
 	// 	i++;
 	// }
-	// i = 0;
-	// while(i < all->len_b)
-	// {
-	// 	printf("%db\n", table_b[i]);
-	// 	i++;
-	// }
+	i = 0;
+	while(i < all->len_b)
+	{
+		printf("%db\n", table_b[i]);
+		i++;
+	}
 	// add_min(table_c, table_min, all->len_a);
 	
 }
@@ -616,7 +657,9 @@ int	main(int ac, char *av[])
 	// else if (all->len_a >= 6 && all->len_a <= 20)
 	// 	sort_twenty(table_a, table_b);
 	// else if (all->len_a > 20 && all->len_a <= 150)
-		sort_hundred(table_a, table_b, table_c, table_min);
+	sort_hundred(table_a, table_b, table_c, table_min);
+	print_table(all->len_b, table_b);
+	print_table(all->len_a, table_a);
 	// i = 0;
 	// while(i < all->len_c)
 	// {

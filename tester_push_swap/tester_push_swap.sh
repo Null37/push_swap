@@ -19,7 +19,8 @@ function push_swap()
 	if [ "$TEST1" == "OK" ]
 	then
 		printf " $BLUE%s\n$RESET" "================="
-		printf " $GREEN%s$@\n$RESET" "stats = OK args ==> "
+		printf " $GREEN%s\n$RESET" "stats = OK" 
+		printf " $GREEN%s$@\n$RESET" "args ==> "
 		printf " $GREEN%s %d\n$RESET" "operations ==" $LENINC
 		printf " $BLUE%s\n$RESET" "================="
 	elif [ "$TEST1" == "KO" ]

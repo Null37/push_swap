@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:34:52 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/07 19:00:26 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/08 19:16:09 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	reverce_rotate(int table_a[], int len)
 		table_a[i] = table_a[i - 1];
 		i--;
 	}
-	table_a[0] = tmp; 
+	table_a[0] = tmp;
 }
 
 void	push_b(int table_a[], int table_b[])
@@ -126,6 +126,7 @@ void	push_b(int table_a[], int table_b[])
 	t_all *all;
 
 	all = all_t();
+	
 	tmp = table_a[0];
 	i = 0;
 	while (i < all->len_a)
@@ -133,18 +134,18 @@ void	push_b(int table_a[], int table_b[])
 		table_a[i] = table_a[i + 1];
 		i++;
 	}
-	all->len_a = all->len_a-1;
-	i = 0;
-	while (i < all->len_b)
+	all->len_a--;
+	i = all->len_b;
+	while (i > 0)
 	{
-		table_b[i + 1] = table_b[i];
-		i++;
+		table_b[i] = table_b[i - 1];
+		i--;
 	}
 	table_b[0] = tmp;
 	all->len_b++;
 }
 
-int get_index(int *ta, int len, int min)
+int get_index(int ta[], int len, int min)
 {
 	int i = 0;
 	while (i < len)
@@ -251,16 +252,16 @@ void	push_a(int ta[], int tb[])
 	int	i;
 
 	t_all *all;
-
 	all = all_t();
 	tmp = tb[0];
 	i = 0;
 	while (i < all->len_b)
 	{
 		tb[i] = tb[i + 1];
-		all->len_b--;
+		
 		i++;
 	}
+	all->len_b--;
 	i = all->len_a;
 	while (i > 0)
 	{
@@ -278,7 +279,6 @@ void sort_five(int ta[], int tb[])
 	all = all_t();
 	half_sort_five(ta, tb);
 	half_sort_five(ta, tb);
-	
 	if (all->len_a == 3)
 		sort_three(ta);
 	push_a(ta, tb);
@@ -349,7 +349,7 @@ void	half_twenty(int ta[], int tb[])
 	int index = get_index(ta, all->len_a, min);
 
 	int size = all->len_a / 2;
-	printf("min == %d | index == %d | size == %d\n", min, index, size);
+	//printf("min == %d | index == %d | size == %d\n", min, index, size);
 	if (index <= size)
 	{
 		while (index > 0)
@@ -368,20 +368,40 @@ void	half_twenty(int ta[], int tb[])
 			index++;
 		}
 	}
-	int i = 0;
-	while(i < all->len_a)
-	{
-		printf("%da == %d\n", ta[i], all->len_a);
-		i++;
-	}
+	// int  i = 0;
+	// while(i < all->len_a)
+	// {
+	// 	printf("%da == %d\n", ta[i], all->len_a);
+	// 	i++;
+	// }
 	write(1, "pb\n", 3);
 	push_b(ta, tb);
-	i = 0;
-	while(i < all->len_b)
-	{
-		printf("%db\n", tb[i]);
-		i++;
-	}
+	// i = 0;
+	// while(i < all->len_a)
+	// {
+	// 	printf("%da == %d\n", ta[i], all->len_a);
+	// 	i++;
+	// }
+	// write(1, "pb\n", 3);
+	// //push_b(ta, tb);
+	// i = 0;
+	// while(i < all->len_b)
+	// {
+	// 	printf("%db\n", tb[i]);
+	// 	i++;
+	// }
+	// i = 0;
+	// while(i < all->len_a)
+	// {
+	// 	printf("%da == %d\n", ta[i], all->len_a);
+	// 	i++;
+	// }
+	// i = 0;
+	// while(i < all->len_b)
+	// {
+	// 	printf("%db\n", tb[i]);
+	// 	i++;
+	// }
 }
 
 void	sort_twenty(int ta[], int tb[])
@@ -389,13 +409,30 @@ void	sort_twenty(int ta[], int tb[])
 	t_all *all;
 
 	all = all_t();
-	int i = 0;
-	while(i < all->len_a)
+	int i = all->len_a;
+	while (i)
 	{
 		half_twenty(ta, tb);
-		i++;
+		i--;
 	}
-	i = 0;
+	//printf("len == > |%d|\n", all->len_a);
+	//push_a(ta, tb);
+	// push_a(ta, tb);
+	// push_a(ta, tb);
+	// push_a(ta, tb);
+	// printf("=======> %d\n", all->len_b);
+	int b = all->len_b;
+	while (b > 0)
+	{
+		write(1, "pa\n", 3);
+		push_a(ta, tb);
+		b--;
+	}
+	
+	// push_a(ta, tb);
+	// push_a(ta, tb);
+	// push_a(ta, tb);
+	// i = 0;
 	// while (i < all->len_b)
 	// {
 	// 	write(1, "pa\n", 3);
@@ -405,6 +442,141 @@ void	sort_twenty(int ta[], int tb[])
 	
 }
 
+
+
+void	half_addmin(int table_c[], int table_min[], int k)
+{
+	t_all *all;
+
+	all = all_t();
+	int min = min_number(table_c, all->len_c);
+	int index = get_index(table_c, all->len_c, min);
+	//printf("index == %d | min == %d\n", index, min);
+	int  i = 0;
+	table_min[k] = table_c[index];
+	table_c[index] = table_c[index + 1];
+	all->len_c--;
+}
+
+void	add_min(int table_c[], int table_min[], int k)
+{
+	t_all *all;
+
+	all = all_t();
+	int i = 0;
+	while (i < k)
+	{
+		half_addmin(table_c, table_min, i);
+		i++;
+	}
+}
+
+int	check_ith_range(int table_min[], int ta)
+{
+	int i = 0;
+	t_all *all;
+
+	all = all_t();
+	while (i < all->len_min)
+	{
+		if (table_min[i] == ta)
+			return (2);
+		i++;
+	}
+	return (-1);
+}
+
+void	start_sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
+{
+	t_all *all;
+
+	all = all_t();
+	all->len_min = 4;
+	int i = 0;
+	int j = all->len_a;
+	while (i < all->len_a)
+	{
+		if (check_ith_range(table_min, table_a[0]) == 2)
+		{
+			write(1, "pb\n", 3);
+			push_b(table_a, table_b);
+			continue ;
+		}
+		if (i < j && check_ith_range(table_min, table_a[++i]) == 2)
+		{
+			write(1, "ra\n", 3);
+			rotate(table_a, all->len_a);
+			i = 0;
+		}
+		else if (i < j && check_ith_range(table_min, table_a[--j]) == 2)
+		{
+			write(1, "rra\n", 4);
+			reverce_rotate(table_a, all->len_a);
+			j = all->len_a;
+		}
+	}
+}
+
+void	half_sor_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
+{
+	t_all *all;
+
+	all = all_t();
+}
+
+void	sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
+{
+	t_all *all;
+
+	all = all_t();
+	
+	int i = 0;
+	// while(i < 4)
+	// {
+	// 	printf("\nmin ==> %dm\n", table_min[i]);
+	// 	i++;
+	// }
+	
+	// while(i < 4)
+	// {
+		add_min(table_c, table_min, 4);
+		i = 0;
+		while(i < 4)
+		{
+			printf("\nmin ==> %dm\n", table_min[i]);
+			i++;
+		}
+		// start_sort_hundred(table_a, table_b, table_c, table_min);
+		// add_min(table_c, table_min, 4);
+		// i = 0;
+		// while(i < 2)
+		// {
+		// 	printf("\nmin ==> %dm\n", table_min[i]);
+		// 	i++;
+		// }
+	// 	i++;
+	// }
+	// if(all->len_a < 4)
+	// {
+	// 	int min = 
+	// }
+	// i = 0;
+	// while(i < all->len_a)
+	// {
+	// 	printf("%da\n", table_a[i]);
+	// 	i++;
+	// }
+	// i = 0;
+	// while(i < all->len_b)
+	// {
+	// 	printf("%db\n", table_b[i]);
+	// 	i++;
+	// }
+	// add_min(table_c, table_min, all->len_a);
+	
+}
+
+
 int	main(int ac, char *av[])
 {
 	int	check;
@@ -413,6 +585,7 @@ int	main(int ac, char *av[])
 	int table_a[ac];
 	int table_b[ac];
 	int table_c[ac];
+	int table_min[ac];
 	int	max;
 	int	min;
 
@@ -420,8 +593,11 @@ int	main(int ac, char *av[])
 	
 	all = all_t();
 	all->len_a = ac - 1;
+	all->len_c = ac - 1;
 	all->len_b = 0;
 	add_to_table_int(av, table_a);
+	add_to_table_int(av, table_c);
+	//add_min(table_c, table_min, 4);
 	//swap_first_two(table_a, len, 'a');
 	//ss_first_two(table_a, table_b);
 	//rotate(table_a, len);
@@ -429,26 +605,28 @@ int	main(int ac, char *av[])
 	//push_b(table_a, table_b, &len);
 	// printf("ac === %d\n", ac);///*
 	//printf("%d", all->len_b);
-	if (all->len_a == 2)
-		sort_two(table_a);
-	else if (all->len_a == 3)
-		sort_three(table_a);
-	else if (all->len_a == 4)
-		sort_four(table_a, table_b);
-	else if (all->len_a == 5)
-		sort_five(table_a, table_b);
-	else if (all->len_a >= 6 && all->len_a <= 20)
-		sort_twenty(table_a, table_a);
-	i = 0;
-	// while(i < all->len_a)
+	// if (all->len_a == 2)
+	// 	sort_two(table_a);
+	// else if (all->len_a == 3)
+	// 	sort_three(table_a);
+	// else if (all->len_a == 4)
+	// 	sort_four(table_a, table_b);
+	// else if (all->len_a == 5)
+	// 	sort_five(table_a, table_b);
+	// else if (all->len_a >= 6 && all->len_a <= 20)
+	// 	sort_twenty(table_a, table_b);
+	// else if (all->len_a > 20 && all->len_a <= 150)
+		sort_hundred(table_a, table_b, table_c, table_min);
+	// i = 0;
+	// while(i < all->len_c)
 	// {
-	// 	printf("%da == %d\n", table_a[i], all->len_a);
+	// 	printf("%dc == %d\n", table_c[i], all->len_c);
 	// 	i++;
 	// }
 	// i = 0;
-	// while(i < all->len_b)
+	// while(i < 4)
 	// {
-	// 	printf("%db\n", table_b[i]);
+	// 	printf("\nmin ==> %dm == %d\n", table_min[i], all->len_c);
 	// 	i++;
 	// }
 	return (0);

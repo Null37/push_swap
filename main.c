@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:34:52 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/08 20:24:26 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/09 19:52:38 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -510,15 +510,10 @@ void	start_sort_hundred(int table_a[], int table_b[], int table_c[], int table_m
 	int d = all->len_min;
 	int i = 0;
 	int j = all->len_a;
-	printf("lenn == %d\n", all->len_a);
 	while (1)
 	{
 		if (all->len_a <= 0 || d == 0)
 			break ;
-		print_table(all->len_a, table_a);
-		print_table(all->len_b, table_b);
-		print_table(all->len_c, table_c);
-		print_table(all->len_min, table_min);
 		if (check_ith_range(table_min, table_a[0]) == 2)
 		{
 			d--;
@@ -543,11 +538,39 @@ void	start_sort_hundred(int table_a[], int table_b[], int table_c[], int table_m
 	}
 }
 
-void	half_sor_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
+void	push_max_t_a(int table_a[], int table_b[])
 {
 	t_all *all;
-
+	int	i;
+	int max;
+	int index;
 	all = all_t();
+	max = max_number(table_b, all->len_b);
+	index = get_index(table_b, all->len_b, max);
+	int size = all->len_b / 2;
+	if (index <= size)
+	{
+		while (index > 0)
+		{
+			write(1, "rb\n", 3);
+			rotate(table_b, all->len_b);
+			index--;
+		}
+	}
+	else if (index > size)
+	{
+		while (index < all->len_b)
+		{
+			write(1, "rrb\n", 4);
+			reverce_rotate(table_b, all->len_b);
+			index++;
+		}
+	}
+	if (all->len_b > 0)
+	{
+		write(1, "pa\n", 3);
+		push_a(table_a, table_b);
+	}
 }
 
 void	sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
@@ -555,7 +578,6 @@ void	sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
 	t_all *all;
 
 	all = all_t();
-	
 	int i;
 	// while(i < 4)
 	// {
@@ -576,17 +598,21 @@ void	sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
 		//start_sort_hundred(table_a, table_b, table_c, table_min);
 		while (all->len_a > 0)
 		{
-			if (all->len_a > 4)
+			if (all->len_a > all->group)
 			{
-				add_min(table_c, table_min, 4);
-				all->len_min = 4;
+				add_min(table_c, table_min, all->group);
+				all->len_min = all->group;
 			}
 			else
 			{
 				add_min(table_c, table_min, all->len_a);
-				all->len_min=all->len_a;
+				all->len_min = all->len_a;
 			}
 			start_sort_hundred(table_a, table_b, table_c, table_min);
+		}
+		while (all->len_b > 0)
+		{
+			push_max_t_a(table_a, table_b);
 		}
 		// add_min(table_c, table_min, 4);
 		// i = 0;
@@ -607,70 +633,64 @@ void	sort_hundred(int table_a[], int table_b[], int table_c[], int table_min[])
 	// 	printf("%da\n", table_a[i]);
 	// 	i++;
 	// }
-	i = 0;
-	while(i < all->len_b)
-	{
-		printf("%db\n", table_b[i]);
-		i++;
-	}
 	// add_min(table_c, table_min, all->len_a);
 	
 }
 
-
-int	main(int ac, char *av[])
+void	start(int ac)
 {
-	int	check;
-	int	i;
-	int len;
-	int table_a[ac];
-	int table_b[ac];
-	int table_c[ac];
-	int table_min[ac];
-	int	max;
-	int	min;
-
 	t_all *all;
-	
+
 	all = all_t();
 	all->len_a = ac - 1;
 	all->len_c = ac - 1;
 	all->len_b = 0;
-	add_to_table_int(av, table_a);
-	add_to_table_int(av, table_c);
-	//add_min(table_c, table_min, 4);
-	//swap_first_two(table_a, len, 'a');
-	//ss_first_two(table_a, table_b);
-	//rotate(table_a, len);
-	//reverce_rotate(table_a, len);
-	//push_b(table_a, table_b, &len);
-	// printf("ac === %d\n", ac);///*
-	//printf("%d", all->len_b);
-	// if (all->len_a == 2)
-	// 	sort_two(table_a);
-	// else if (all->len_a == 3)
-	// 	sort_three(table_a);
-	// else if (all->len_a == 4)
-	// 	sort_four(table_a, table_b);
-	// else if (all->len_a == 5)
-	// 	sort_five(table_a, table_b);
-	// else if (all->len_a >= 6 && all->len_a <= 20)
-	// 	sort_twenty(table_a, table_b);
-	// else if (all->len_a > 20 && all->len_a <= 150)
-	sort_hundred(table_a, table_b, table_c, table_min);
-	print_table(all->len_b, table_b);
-	print_table(all->len_a, table_a);
-	// i = 0;
-	// while(i < all->len_c)
-	// {
-	// 	printf("%dc == %d\n", table_c[i], all->len_c);
-	// 	i++;
-	// }
-	// i = 0;
-	// while(i < 4)
-	// {
-	// 	printf("\nmin ==> %dm == %d\n", table_min[i], all->len_c);
-	// 	i++;
-	// }
+	all->table_a = malloc(sizeof(int) * ac);
+	all->table_b = malloc(sizeof(int) * ac);
+	all->table_c = malloc(sizeof(int) * ac);
+	all->table_min = malloc(sizeof(int) * ac);
+}
+
+void add_argument(char **av)
+{
+	int i;
+	char **s;
+	while(av[i])
+	{
+		s = ft_split(av[i], 32);
+		i++;
+	}
+}
+
+int	main(int ac, char *av[])
+{
+	t_all *all;
+	
+	all = all_t();
+	
+	start(ac);
+	// add_argument(av);
+	add_to_table_int(av, all->table_a);
+	add_to_table_int(av, all->table_c);
+	if (all->len_a == 2)
+		sort_two(all->table_a);
+	else if (all->len_a == 3)
+		sort_three(all->table_a);
+	else if (all->len_a == 4)
+		sort_four(all->table_a, all->table_b);
+	else if (all->len_a == 5)
+		sort_five(all->table_a, all->table_b);
+	else if (all->len_a >= 6 && all->len_a <= 20)
+		sort_twenty(all->table_a, all->table_b);
+	else if (all->len_a > 20 && all->len_a <= 150)
+	{
+		all->group = all->len_c / 6;
+		sort_hundred(all->table_a, all->table_b, all->table_c, all->table_min);
+	}
+	else if (all->len_a > 20 && all->len_a > 150)
+	{
+		all->group = all->len_c / 12;
+		sort_hundred(all->table_a, all->table_b, all->table_c, all->table_min);
+	}
 	return (0);
 }

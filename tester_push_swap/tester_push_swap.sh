@@ -10,9 +10,10 @@ MAGENTA="\033[35m"
 CYAN="\033[36m"
 WHITE="\033[37m"
 
+gcc ../main.c -o ../push_swap
+
 function push_swap()
 {
-	gcc ../main.c -o ../push_swap
 	TEST1=$(../push_swap $@ | ../checker_Mac $@)
 	LENINC=$(../push_swap $@ | wc -l)
 

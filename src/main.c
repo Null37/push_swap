@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:34:52 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/10 14:23:48 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/10 15:43:57 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -819,8 +819,10 @@ int	check_double(int ac)
 int	main(int ac, char *av[])
 {
 	t_all *all;
-	
+
 	all = all_t();
+	char	*line;;
+	char c;
 
 	start(ac);
 	rem_args(av);

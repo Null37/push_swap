@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:34:52 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/09 19:52:38 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/10 14:23:48 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ void	add_to_table_int(char *av[], int table[])
 	int		i;
 	t_all	*all;
 	
-	i = 1;
+	i = 0;
 	all = all_t();
-	while (i <= all->len_a)
+	while (av[i] != NULL)
 	{
-		table[i - 1] = atoi(av[i]);
+		table[i] = atoi(av[i]);
 		i++;
 	}
 }
@@ -644,22 +644,176 @@ void	start(int ac)
 	all = all_t();
 	all->len_a = ac - 1;
 	all->len_c = ac - 1;
+	all->len_sort = ac -1;
 	all->len_b = 0;
 	all->table_a = malloc(sizeof(int) * ac);
 	all->table_b = malloc(sizeof(int) * ac);
 	all->table_c = malloc(sizeof(int) * ac);
 	all->table_min = malloc(sizeof(int) * ac);
+	all->sor_table = malloc(sizeof(int) * ac);
 }
 
-void add_argument(char **av)
+void	norm_list(char **ar)
 {
-	int i;
-	char **s;
-	while(av[i])
+	int	i;
+
+	t_all *all;
+	
+	all = all_t();
+	i = 0;
+	while (all->args && all->args[i])
 	{
-		s = ft_split(av[i], 32);
+		all->tmp[i] = all->args[i];
 		i++;
 	}
+	all->j = 0;
+	while (ar[all->j])
+	{
+		all->tmp[i] = ar[all->j];
+		i++;
+		all->j++;
+	}
+	all->tmp[i] = NULL;
+	all->args = all->tmp;
+}
+
+void    add_in_list(char **ar)
+{
+	int	i;
+	t_all *all;
+	
+	all = all_t();
+	all->c = 0;
+	all->c2 = 0;
+	i = -1;
+	if (!ar)
+		return ;
+	while (ar[++i])
+		all->c++;
+	i = -1;
+	while (all->args && all->args[++i])
+		all->c2++;
+	all->tmp = malloc(sizeof(char *) * (all->c + all->c2) + 1);
+	norm_list(ar);
+}
+
+void	rem_args(char **av)
+{
+	int		i;
+	char	**ar;
+	int		c;
+	t_all *all;
+	
+	all = all_t();
+	i = 0;
+	c = 0;
+	while (av[++i])
+	{
+		ar = ft_split(av[i], ' ');
+		add_in_list(ar);
+		free(ar);
+	}
+	i = -1;
+	while (all->args[++i])
+		c++;
+	all->ac = c;
+}
+
+void swap(int *xp, int *yp)
+{
+	int temp = *xp;
+	*xp = *yp;
+	*yp = temp;
+}
+ 
+// A function to implement bubble sort
+void	bubblesort(int arr[], int n)
+{
+	int i, j;
+	for (i = 0; i < n-1; i++)
+ 
+	   // Last i elements are already in place  
+	   for (j = 0; j < n-i-1; j++)
+		   if (arr[j] > arr[j+1])
+			  swap(&arr[j], &arr[j+1]);
+}
+ 
+/* Function to print an array */
+void printArray(int arr[], int size)
+{
+	int i;
+	for (i=0; i < size; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+
+int	check_table_sort()
+{
+	t_all *all;
+
+	all = all_t();
+	int i = 0;
+	while(i < all->len_sort)
+	{
+		if(all->sor_table[i] == all->table_a[i])
+			i++;
+		else
+			return (1);
+	}
+	return (0);
+}
+
+int	t_isdigit(char number)
+{
+	if ((number >= '0' && number <= '9'))
+	{
+		return (1);
+	}
+	else
+		return (0);
+}
+
+int	check_erros(char **av)
+{
+	t_all *all;
+
+	all = all_t();
+	int i = 0;
+	int j;
+	while(av[i])
+	{
+		if (*av[i] == '-' || *av[i] == '+')
+			if (t_isdigit(av[i][1]) != 1)
+				return (-1);
+		if (t_isdigit(*av[i]) != 1 && *av[i] != '-' && *av[i] != '+')
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_double(int ac)
+{
+	int	i;
+	int j;
+
+	j = 0;
+	i = 0;
+	t_all *all;
+	
+	all = all_t();
+	while(i < ac - 1)
+	{
+		j = 0;
+		while (j < ac -1)
+		{
+			if(i != j && all->table_a[i] == all->table_a[j])
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 int	main(int ac, char *av[])
@@ -667,30 +821,45 @@ int	main(int ac, char *av[])
 	t_all *all;
 	
 	all = all_t();
-	
+
 	start(ac);
-	// add_argument(av);
-	add_to_table_int(av, all->table_a);
-	add_to_table_int(av, all->table_c);
-	if (all->len_a == 2)
-		sort_two(all->table_a);
-	else if (all->len_a == 3)
-		sort_three(all->table_a);
-	else if (all->len_a == 4)
-		sort_four(all->table_a, all->table_b);
-	else if (all->len_a == 5)
-		sort_five(all->table_a, all->table_b);
-	else if (all->len_a >= 6 && all->len_a <= 20)
-		sort_twenty(all->table_a, all->table_b);
-	else if (all->len_a > 20 && all->len_a <= 150)
+	rem_args(av);
+	if (check_erros(all->args) == -1)
 	{
-		all->group = all->len_c / 6;
-		sort_hundred(all->table_a, all->table_b, all->table_c, all->table_min);
+		write(1, "Error\n", 6);
+		return (-1);
 	}
-	else if (all->len_a > 20 && all->len_a > 150)
+	add_to_table_int(all->args, all->table_a);
+	if (check_double(ac) == -1)
 	{
-		all->group = all->len_c / 12;
-		sort_hundred(all->table_a, all->table_b, all->table_c, all->table_min);
+		write(1, "Error\n", 6);
+		return (-1);
+	}
+	add_to_table_int(all->args, all->table_c);
+	add_to_table_int(all->args, all->sor_table);
+	bubblesort(all->sor_table, all->len_sort);
+	if (check_table_sort() == 1)
+	{
+		if (all->len_a == 2)
+			sort_two(all->table_a);
+		else if (all->len_a == 3)
+			sort_three(all->table_a);
+		else if (all->len_a == 4)
+			sort_four(all->table_a, all->table_b);
+		else if (all->len_a == 5)
+			sort_five(all->table_a, all->table_b);
+		else if (all->len_a >= 6 && all->len_a <= 20)
+			sort_twenty(all->table_a, all->table_b);
+		else if (all->len_a > 20 && all->len_a <= 150)
+		{
+			all->group = all->len_c / 6;
+			sort_hundred(all->table_a, all->table_b, all->table_c, all->table_min);
+		}
+		else if (all->len_a > 20 && all->len_a > 150)
+		{
+			all->group = all->len_c / 12;
+			sort_hundred(all->table_a, all->table_b, all->table_c, all->table_min);
+		}
 	}
 	return (0);
 }

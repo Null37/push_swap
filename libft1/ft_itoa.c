@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssamadi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 12:58:01 by ssamadi           #+#    #+#             */
-/*   Updated: 2019/11/14 15:45:34 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/05/26 16:02:00 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../minishell_hr.h"
 
 static int	numblen(long long number)
 {
@@ -34,31 +35,29 @@ static int	numblen(long long number)
 	return (len);
 }
 
-char		*ft_itoa(int nbr)
+char	*ft_itoa(int nbr)
 {
-	long long	x;
-	int			n;
-	int			i;
-	char		*str;
+	t_libftn	lib;
 
-	i = numblen(nbr);
-	n = 0;
-	x = nbr;
-	if ((str = (char *)malloc(sizeof(char) * i + 1)) == NULL)
+	lib.i = numblen(nbr);
+	lib.n = 0;
+	lib.x = nbr;
+	lib.str = (char *)malloc(sizeof(char) * lib.i + 1);
+	if (lib.str == NULL)
 		return (NULL);
-	str[i] = '\0';
+	lib.str[lib.i] = '\0';
 	if (nbr < 0)
 	{
-		str[0] = '-';
-		x = x * -1;
-		n = 1;
+		lib.str[0] = '-';
+		lib.x = lib.x * -1;
+		lib.n = 1;
 	}
-	i--;
-	while ((i > 0 && n == 1) || (i >= 0 && n == 0))
+	lib.i--;
+	while ((lib.i > 0 && lib.n == 1) || (lib.i >= 0 && lib.n == 0))
 	{
-		str[i] = x % 10 + 48;
-		x /= 10;
-		i--;
+		lib.str[lib.i] = lib.x % 10 + 48;
+		lib.x /= 10;
+		lib.i--;
 	}
-	return (str);
+	return (lib.str);
 }

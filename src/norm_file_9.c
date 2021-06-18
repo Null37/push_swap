@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 17:35:25 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/14 17:51:19 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/15 17:35:16 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,27 @@ int	check_erros(char **av)
 {
 	t_all	*all;
 	int		i;
+	int		j;
 
 	all = all_t();
 	i = 0;
 	while (av[i])
 	{
-		if (*av[i] == '-' || *av[i] == '+')
-			if (t_isdigit(av[i][1]) != 1)
+		j = 0;
+		if (av[i][j] == '-' || av[i][j] == '+')
+			j++;
+		while (av[i][j])
+		{
+			if (t_isdigit(av[i][j]) != 1)
 				return (-1);
-		if (t_isdigit(*av[i]) != 1 && *av[i] != '-' && *av[i] != '+')
-			return (-1);
+			j++;
+		}
 		i++;
 	}
 	return (0);
 }
 
-int	check_double(int ac)
+int	check_double(void)
 {
 	LONG_L	i;
 	LONG_L	j;
@@ -57,10 +62,10 @@ int	check_double(int ac)
 	j = 0;
 	i = 0;
 	all = all_t();
-	while (i < ac - 1)
+	while (i < all->ac)
 	{
 		j = 0;
-		while (j < ac - 1)
+		while (j < all->ac)
 		{
 			if (i != j && all->table_a[i] == all->table_a[j])
 				return (-1);

@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/14 17:57:09 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:05:55 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	sort_hundred(LONG_L table_a[], LONG_L table_b[],
 			LONG_L table_c[], LONG_L table_min[]);
 void	half_twenty(LONG_L ta[], LONG_L tb[]);
 void	push_max_t_a(LONG_L table_a[], LONG_L table_b[]);
-void	start(int ac);
+void	start(void);
 void	norm_list(char **ar);
 void	add_in_list(char **ar);
 void	rem_args(char **av);
@@ -85,7 +85,7 @@ int		check_table_sort(void);
 int		t_isdigit(char number);
 void	bubblesort(LONG_L arr[], LONG_L n);
 void	half_main(t_all *all);
-int		check_double(int ac);
+int		check_double(void);
 int		check_erros(char **av);
 
 #endif

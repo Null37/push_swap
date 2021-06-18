@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:52:40 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/14 17:57:49 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:28:53 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	reverce_rotate(LONG_L table_a[], LONG_L len)
 	LONG_L	tmp;
 	LONG_L	i;
 
-	i = len;
+	i = len - 1;
 	tmp = table_a[len - 1];
 	while (i > 0)
 	{
@@ -38,6 +38,8 @@ void	push_b(LONG_L table_a[], LONG_L table_b[])
 	i = 0;
 	while (i < all->len_a)
 	{
+		if (i + 1 >= all->len_a)
+			break ;
 		table_a[i] = table_a[i + 1];
 		i++;
 	}

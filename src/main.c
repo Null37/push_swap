@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:34:52 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/14 17:49:12 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/15 17:32:04 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ t_all	*all_t(void)
 	return (&all);
 }
 
-int	err_message(int ac)
+int	err_message(void)
 {
 	if (check_max_int() == -1)
 	{
 		write(2, "Error\n", 6);
 		return (-1);
 	}
-	if (check_double(ac) == -1)
+	if (check_double() == -1)
 	{
 		write(2, "Error\n", 6);
 		return (-1);
@@ -39,17 +39,18 @@ int	main(int ac, char *av[])
 	t_all	*all;
 
 	all = all_t();
+	all->args = NULL;
 	if (ac > 1)
 	{
-		start(ac);
 		rem_args(av);
+		start();
 		if (check_erros(all->args) == -1)
 		{
 			write(2, "Error\n", 6);
 			return (-1);
 		}
 		add_to_table_int(all->args, all->table_a);
-		if (err_message(ac) == -1)
+		if (err_message() == -1)
 			return (-1);
 		add_to_table_int(all->args, all->table_c);
 		add_to_table_int(all->args, all->sor_table);

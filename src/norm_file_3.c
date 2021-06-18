@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:01:54 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/14 17:58:17 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/15 17:33:03 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	push_a(LONG_L ta[], LONG_L tb[])
 	i = 0;
 	while (i < all->len_b)
 	{
+		if (i + 1 >= all->len_b)
+			break ;
 		tb[i] = tb[i + 1];
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 16:49:46 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/14 17:51:19 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/15 17:26:26 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,20 @@ void	sort_hundred(LONG_L table_a[], LONG_L table_b[],
 		push_max_t_a(table_a, table_b);
 }
 
-void	start(int ac)
+void	start(void)
 {
 	t_all	*all;
 
 	all = all_t();
-	all->len_a = ac - 1;
-	all->len_c = ac - 1;
-	all->len_sort = ac - 1;
+	all->len_a = all->ac;
+	all->len_c = all->ac;
+	all->len_sort = all->ac;
 	all->len_b = 0;
-	all->table_a = malloc(sizeof(LONG_L) * ac);
-	all->table_b = malloc(sizeof(LONG_L) * ac);
-	all->table_c = malloc(sizeof(LONG_L) * ac);
-	all->table_min = malloc(sizeof(LONG_L) * ac);
-	all->sor_table = malloc(sizeof(LONG_L) * ac);
+	all->table_a = malloc(sizeof(LONG_L) * all->ac);
+	all->table_b = malloc(sizeof(LONG_L) * all->ac);
+	all->table_c = malloc(sizeof(LONG_L) * all->ac);
+	all->table_min = malloc(sizeof(LONG_L) * all->ac);
+	all->sor_table = malloc(sizeof(LONG_L) * all->ac);
 }
 
 void	norm_list(char **ar)
@@ -108,6 +108,8 @@ void	norm_list(char **ar)
 		all->tmp[i] = all->args[i];
 		i++;
 	}
+	free(all->args);
+	all->args = NULL;
 	all->j = 0;
 	while (ar[all->j])
 	{

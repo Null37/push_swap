@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:50:10 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/14 17:56:52 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/15 17:32:36 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,16 @@ void	swap_first_two(LONG_L table[], char o)
 		write(1, "sb\n", 3);
 }
 
-void	add_to_table_int(char *av[], LONG_L table[])
+void	add_to_table_int(char **av, LONG_L table[])
 {
 	LONG_L		i;
 	t_all		*all;
 
-	i = 0;
+	i = -1;
 	all = all_t();
-	while (av[i] != NULL)
+	while (av[++i])
 	{
 		table[i] = ft_my_atoi(av[i]);
-		i++;
 	}
 }
 
@@ -82,6 +81,8 @@ void	rotate(LONG_L table_a[], LONG_L len)
 	tmp = table_a[0];
 	while (i < len)
 	{
+		if (i + 1 >= len)
+			break ;
 		table_a[i] = table_a[i + 1];
 		i++;
 	}

@@ -6,12 +6,11 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:04:34 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/05/26 16:13:49 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/19 18:24:55 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../minishell_hr.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

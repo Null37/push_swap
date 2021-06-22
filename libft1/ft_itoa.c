@@ -6,12 +6,11 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 12:58:01 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/05/26 16:02:00 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/19 13:02:20 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../minishell_hr.h"
 
 static int	numblen(long long number)
 {

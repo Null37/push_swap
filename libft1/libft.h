@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 22:07:43 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/05/18 11:54:34 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/19 13:05:23 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_libf
+{
+	long		x;
+	int			n;
+	int			i;
+	char		*str;
+	int			i2;
+	int			j;
+	char		**pm;
+	size_t		i3;
+	size_t		x3;
+	size_t		j3;
+	char		*p;
+}	t_libftn;
 
 char				*ft_itoa(int n);
 char				*ft_strdup(const char *s1);

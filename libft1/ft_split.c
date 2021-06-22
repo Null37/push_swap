@@ -6,12 +6,11 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:49:28 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/05/26 16:08:47 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/19 18:53:18 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../minishell_hr.h"
 
 static int	word_count(const char *str, char c)
 {

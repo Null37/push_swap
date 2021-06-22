@@ -6,7 +6,7 @@
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 12:46:14 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/15 14:05:55 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/20 17:30:40 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,24 @@ typedef struct s_all
 	LONG_L	d;
 	LONG_L	i;
 	LONG_L	jj;
+	char	*line;
+	char	*aplc;
+	char	*tmp_a;
+	int		ret;
 }	t_all;
 
 LONG_L	ft_my_atoi(const char *str);
 LONG_L	max_number(LONG_L *av, LONG_L len);
 LONG_L	min_number(LONG_L *av, LONG_L len);
 void	swap_first_two(LONG_L table[], char o);
+int		get_next_line(int fd, char **line);
+void	swap_first_two_b(LONG_L table[]);
 void	add_to_table_int(char *av[], LONG_L table[]);
 void	rotate(LONG_L table_a[], LONG_L len);
 void	reverce_rotate(LONG_L table_a[], LONG_L len);
 void	push_b(LONG_L table_a[], LONG_L table_b[]);
 LONG_L	get_index(LONG_L ta[], LONG_L len, LONG_L min);
+void	free_args(char **ar);
 void	ss_first_two(LONG_L table_a[], LONG_L table_b[]);
 void	loop_rra(LONG_L	index, LONG_L ta[]);
 void	half_sort_five(LONG_L ta[], LONG_L tb[]);
@@ -66,9 +73,18 @@ void	half_sort_four(LONG_L ta[], LONG_L tb[]);
 void	sort_four(LONG_L ta[], LONG_L tb[]);
 void	sort_twenty(LONG_L ta[], LONG_L tb[]);
 void	half_addmin(LONG_L table_c[], LONG_L table_min[], LONG_L k);
+void	half_main_bonus(t_all *all, char *line);
 void	add_min(LONG_L table_c[], LONG_L table_min[], LONG_L k);
 int		check_ith_range(LONG_L table_min[], LONG_L ta);
 int		check_max_int(void);
+void	free_all(void);
+void	check_is_a_sorted(void);
+void	half_loop_bonus(t_all *all, char **sp, int i);
+void	loop_read(t_all	*all);
+int		half_errr(t_all	*all);
+int		check_oprtion(char *line);
+char	*ft_strjoin12(char *s1, char *s2);
+int		err_message(void);
 t_all	*all_t(void);
 void	start_sort_hundred(LONG_L table_a[], LONG_L table_b[],
 			LONG_L table_min[]);

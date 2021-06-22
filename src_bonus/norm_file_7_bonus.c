@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   norm_file_7.c                                      :+:      :+:    :+:   */
+/*   norm_file_7_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssamadi <ssamadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 16:49:46 by ssamadi           #+#    #+#             */
-/*   Updated: 2021/06/19 18:03:09 by ssamadi          ###   ########.fr       */
+/*   Updated: 2021/06/20 17:09:20 by ssamadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,6 @@ void	push_max_t_a(LONG_L table_a[], LONG_L table_b[])
 	}
 }
 
-void	sort_hundred(LONG_L table_a[], LONG_L table_b[],
-			LONG_L table_c[], LONG_L table_min[])
-{
-	t_all	*all;
-	LONG_L	i;
-
-	all = all_t();
-	i = 0;
-	while (all->len_a > 0)
-	{
-		if (all->len_a > all->group)
-		{
-			add_min(table_c, table_min, all->group);
-			all->len_min = all->group;
-		}
-		else
-		{
-			add_min(table_c, table_min, all->len_a);
-			all->len_min = all->len_a;
-		}
-		start_sort_hundred(table_a, table_b, table_min);
-	}
-	while (all->len_b > 0)
-		push_max_t_a(table_a, table_b);
-}
-
 void	start(void)
 {
 	t_all	*all;
@@ -91,8 +65,6 @@ void	start(void)
 	all->len_b = 0;
 	all->table_a = malloc(sizeof(LONG_L) * all->ac);
 	all->table_b = malloc(sizeof(LONG_L) * all->ac);
-	all->table_c = malloc(sizeof(LONG_L) * all->ac);
-	all->table_min = malloc(sizeof(LONG_L) * all->ac);
 	all->sor_table = malloc(sizeof(LONG_L) * all->ac);
 }
 
